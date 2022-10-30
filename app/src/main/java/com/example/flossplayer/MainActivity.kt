@@ -8,6 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val myBookList = createBookList()
 
     }
 
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
         val books = resources.getStringArray(R.array.books)
         val authors = resources.getStringArray(R.array.authors)
 
-        val
+        val myBookList = BookList()
+        for (item in books.indices){
+            myBookList.add(Book(books[item], authors[item]))
+        }
+        return myBookList
     }
 }
