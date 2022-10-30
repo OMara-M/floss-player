@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FlossPlayer</string>
-    <string-array name="list_of_books">
+    <string-array name="books">
         <item>Book01</item>
         <item>Book02</item>
         <item>Book03</item>
@@ -13,7 +13,7 @@
         <item>Book10</item>
     </string-array>
 
-    <string-array name="list_of_authors">
+    <string-array name="authors">
         <item>Author01</item>
         <item>Author02</item>
         <item>Author03</item>
