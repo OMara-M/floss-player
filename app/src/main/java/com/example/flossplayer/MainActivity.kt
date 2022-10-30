@@ -2,6 +2,7 @@ package com.example.flossplayer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9,6 +10,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val myBookList = createBookList()
+
+        val bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
 
 
