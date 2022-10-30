@@ -12,7 +12,11 @@ class BookList {
     fun remove(book: Book){
         myBookList.remove(book)
     }
-    fun get(){}
-    fun size(){}
+    fun get(bookID: Int): Book{
+        return myBookList[bookID]
+    }
+    fun size(): Int{
+        return myBookList.size
+    }
 
 }
