@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 
 class BookFragment : Fragment() {
     lateinit var bookViewModel: BookViewModel
@@ -12,6 +13,7 @@ class BookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        bookViewModel = ViewModelProvider(requireActivity()).get(BookViewModel::class.java)
     }
 
     override fun onCreateView(
