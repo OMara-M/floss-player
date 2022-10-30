@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">FlossPlayer</string>
+    <string-array name="list_of_books">
+        <item>Book01</item>
+        <item>Book02</item>
+        <item>Book03</item>
+        <item>Book04</item>
+        <item>Book05</item>
+        <item>Book06</item>
+        <item>Book07</item>
+        <item>Book08</item>
+        <item>Book09</item>
+        <item>Book10</item>
+    </string-array>
+
+    <string-array name="list_of_authors">
+        <item>Author01</item>
+        <item>Author02</item>
+        <item>Author03</item>
+        <item>Author04</item>
+        <item>Author05</item>
+        <item>Author06</item>
+        <item>Author07</item>
+        <item>Author08</item>
+        <item>Author09</item>
+        <item>Author10</item>
+    </string-array>
 </resources>
