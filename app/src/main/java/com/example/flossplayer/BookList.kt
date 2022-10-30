@@ -3,7 +3,11 @@ package com.example.flossplayer
 import android.os.Parcel
 import android.os.Parcelable
 
-class BookList(parcel: Parcel) : Parcelable {
+class BookList() : Parcelable {
+
+    constructor(parcel: Parcel) : this(){
+
+    }
 
     private val myBookList = ArrayList<Book>()
 

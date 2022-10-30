@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val books = resources.getStringArray(R.array.books)
         val authors = resources.getStringArray(R.array.authors)
 
-        val myBookList = BookList(parcel)
+        val myBookList = BookList()
         for (item in books.indices){
             myBookList.add(Book(books[item], authors[item]))
         }
