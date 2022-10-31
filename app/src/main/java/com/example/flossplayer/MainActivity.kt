@@ -13,7 +13,12 @@ class MainActivity : AppCompatActivity() {
 
         val bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
-
+        if(supportFragmentManager.findFragmentById(R.id.container1) !is BookListFragment){
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container1, BookListFragment.newInstance(myBookList))
+                .commit()
+        }
 
     }
 
