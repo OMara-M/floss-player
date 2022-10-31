@@ -1,7 +1,9 @@
 package com.example.flossplayer
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 
@@ -48,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         val myBookList = BookList()
         for (item in books.indices) {
+//            Log.i("books",books[item])
+//            Log.i("auth",authors[item])
             myBookList.add(Book(books[item], authors[item]))
         }
         return myBookList
