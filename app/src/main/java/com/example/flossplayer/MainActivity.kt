@@ -2,6 +2,7 @@ package com.example.flossplayer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,15 @@ class MainActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.container1, BookListFragment.newInstance(myBookList))
                 .commit()
+        }
+
+        bookViewModel.getSelectedBook().observe(this){
+            if(findViewById<View>(R.id.container2) == null && it.title != "")
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container1, BookFragment())
+                    .addToBackStack(null)
+                    .commit()
         }
 
     }
