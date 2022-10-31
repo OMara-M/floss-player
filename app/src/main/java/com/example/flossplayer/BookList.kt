@@ -5,11 +5,10 @@ import android.os.Parcelable
 
 class BookList() : Parcelable {
 
-    constructor(parcel: Parcel) : this(){
-
-    }
-
     private val myBookList = ArrayList<Book>()
+
+    constructor(parcel: Parcel) : this(){
+    }
 
     fun add(book: Book){
         myBookList.add(book)

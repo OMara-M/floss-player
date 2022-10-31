@@ -15,7 +15,7 @@
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="testBook"/>
+        tools:text="Book"/>
 
     <TextView
         android:id="@+id/bookAuthor"
@@ -26,6 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="testAuth"/>
+        tools:text="Auth"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

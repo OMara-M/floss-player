@@ -14,15 +14,15 @@ class MainActivity : AppCompatActivity() {
 
         val bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
-        if(supportFragmentManager.findFragmentById(R.id.container1) !is BookListFragment){
+        if (supportFragmentManager.findFragmentById(R.id.container1) !is BookListFragment) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container1, BookListFragment.newInstance(myBookList))
                 .commit()
         }
 
-        bookViewModel.getSelectedBook().observe(this){
-            if(findViewById<View>(R.id.container2) == null && it.title != "")
+        bookViewModel.getSelectedBook().observe(this) {
+            if (findViewById<View>(R.id.container2) == null && it.title != "")
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container1, BookFragment())
@@ -32,12 +32,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createBookList(): BookList{
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+        if (findViewById<View>(R.id.container2) == null) {
+            val blankBook = Book("", "")
+            bookViewModel.setSelectedBook(blankBook)
+
+        }
+    }
+
+    private fun createBookList(): BookList {
         val books = resources.getStringArray(R.array.books)
         val authors = resources.getStringArray(R.array.authors)
 
         val myBookList = BookList()
-        for (item in books.indices){
+        for (item in books.indices) {
             myBookList.add(Book(books[item], authors[item]))
         }
         return myBookList

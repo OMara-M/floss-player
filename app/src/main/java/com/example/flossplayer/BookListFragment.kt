@@ -5,54 +5,92 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class BookListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var books: BookList? = null
+    private lateinit var bookViewModel: BookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        bookViewModel = ViewModelProvider(requireActivity()).get(BookViewModel::class.java)
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            books = it.getParcelable(ARG_PARAM1)
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_list, container, false)
+        return inflater.inflate(R.layout.fragment_book_list, container, false) as RecyclerView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(view as RecyclerView) {
+            books?.run {
+                val clickEvent = { book: Book ->
+                    bookViewModel.setSelectedBook(book)
+                }
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = BookListAdapter(this, clickEvent)
+            }
+        }
+    }
+
+    class BookListAdapter(_bookList: BookList, _clickEvent: (Book) -> Unit) :
+        RecyclerView.Adapter<BookListAdapter.BookListViewHolder>() {
+        private val bookList = _bookList
+        val clickEvent = _clickEvent
+
+        inner class BookListViewHolder(_view: View) : RecyclerView.ViewHolder(_view) {
+            val bookName: TextView = _view.findViewById(R.id.bookTextView)
+            val bookAuthor: TextView = _view.findViewById(R.id.authorTextView)
+            lateinit var bookObject: Book
+
+            init {
+                _view.setOnClickListener { clickEvent(bookObject) }
+            }
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookListViewHolder {
+
+            val layout = LayoutInflater.from(parent.context)
+                .inflate(R.layout.book_list_layout, parent, false)
+
+            return BookListViewHolder(layout)
+        }
+
+        override fun onBindViewHolder(holder: BookListViewHolder, position: Int) {
+            holder.bookName.text = bookList.get(position).title
+            holder.bookAuthor.text = bookList.get(position).author
+            holder.bookObject = bookList.get(position)
+        }
+
+        override fun getItemCount(): Int {
+            return bookList.size()
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(books: BookList) =
             BookListFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(ARG_PARAM1, books)
                 }
             }
     }
